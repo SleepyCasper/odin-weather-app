@@ -1,3 +1,16 @@
 :root {
-   
+   --system-ui: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+
+   --primary: hsl(224, 61%, 6%);
+   --secondary: hsl(221, 40%, 9%);
+   --tertiary: hsl(221, 49%, 15%);
+   --text-main: hsl(0, 0%, 100%);
+   --text-secondary: hsl(220, 6%, 43%);
+   --accent: hsl(263, 84%, 55%);
+   --hover-accent: hsl(263, 84%, 60%);
+
+   --h1-medium: normal 500 4rem 'Inter', var(--system-ui);
+   --h2-medium: normal 500 2.5rem 'Inter', var(--system-ui);
+   --h3-regular: normal 400 2rem 'Inter', var(--system-ui);
+   --h4-regular: normal 400 1.25rem 'Inter', var(--system-ui);  
 }

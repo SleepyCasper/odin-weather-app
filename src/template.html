@@ -3,9 +3,237 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Zephyr</title>
 </head>
 <body>
-    
+    <header>
+        <div class="search">
+            <span class="icon"></span>
+            <input class="secondary" id="input-search" type="text" placeholder="Search city...">
+        </div>
+        <!-- <button id="btn-toggle-theme" class="btn" type="button"></button> -->
+        <label class="switch" id="toggle-theme">
+            <input type="checkbox">
+            <span class="slider"></span>
+        </label>
+    </header>
+
+    <div class="card-today secondary card">
+        <div class="left">
+            <div class="title-city" id="title-city" data-field="city"><span class="icon"></span>Kyiv</div>
+            
+            <div class="wrapper date">
+                <h2 id="today-day" data-field="day">Monday</h2>
+                <div class="date" id="today-date" data-field="date">12 Apr, 2026</div>
+            </div>
+            <div class="wrapper temp">
+                <h1 id="today-temp" data-field="temp">21°C</h1>
+                <div id="today-min-max" data-field="min-max">Min: 10° Max: 24°</div>
+            </div>
+        </div>
+        <div class="right">
+            <button id="btn-toggle-deg" class="btn c">
+                <div class="active" id="cel">C</div>
+                <div id="far">F</div>
+            </button>
+            <img class="icon" id="today-icon" src="./media/weather/partly-cloudy.svg" alt="Today's weather">
+            <h3 class="visib" data-field="condition">Cloudy</h3>
+        </div>
+    </div>
+    <div class="card-hourly secondary card" id="card-hourly">
+        <div id="toggle-hourly">
+            <h4><a href="#" class="active today">Today</a>/<a href="#" class="week">Week</a></h4>
+        </div>
+        <div class="container-hourly" id="container-hourly">
+            <div class="container-details" id="container-details">
+                <p>Temperature</p>
+                <p>Feels like</p>
+                <p>Precipitation</p>
+                <p>Wind</p>
+            </div>
+            
+            <div class="wrapper week dragscroll" id="wrapper-week">
+                <div class="card-day">
+                    <p class="day" data-field="day">Monday</p>
+                    <img src=".//media/weather/partly-cloudy.svg" data-field="condition">
+                    <p class="temp" data-field="min-max">↓10° ↑24°</p>
+                    <p class="precip" data-field="precip">13%</p>
+                    <p class="wind" data-field="wind"><span class="icon wind-dir"></span>1.2m/s</p>
+                </div>
+            </div>
+
+            <div class="wrapper hours dragscroll active" id="wrapper-hours">
+                <div class="card-hour">
+                    <p class="hour" data-field="hour">11:00</p>
+                    <img src=".//media/weather/partly-cloudy.svg" alt="" data-field="condition">
+                    <p class="temp" data-field="temp">12°</p>
+                    <p class="feels" data-field="feels">14°</p>
+                    <p class="precip" data-field="precip">13%</p>
+                    <p class="wind" data-field="wind"><span class="icon wind-dir"></span>3.3m/s</p>
+                </div>
+                <div class="card-hour">
+                    <p class="hour">11:00</p>
+                    <img src=".//media/weather/partly-cloudy.svg" alt="">
+                    <p class="temp" data-field="temp">12°</p>
+                    <p class="feels" data-field="feels">14°</p>
+                    <p class="precip" data-field="precip">13%</p>
+                    <p class="wind" data-field="wind"><span class="icon wind-dir"></span>3.3m/s</p>
+                </div>
+                <div class="card-hour">
+                    <p class="hour">11:00</p>
+                    <img src=".//media/weather/partly-cloudy.svg" alt="">
+                    <p class="temp" data-field="temp">12°</p>
+                    <p class="feels" data-field="feels">14°</p>
+                    <p class="precip" data-field="precip">13%</p>
+                    <p class="wind" data-field="wind"><span class="icon wind-dir"></span>3.3m/s</p>
+                </div>
+                <div class="card-hour">
+                    <p class="hour">11:00</p>
+                    <img src=".//media/weather/partly-cloudy.svg" alt="">
+                    <p class="temp" data-field="temp">12°</p>
+                    <p class="feels" data-field="feels">14°</p>
+                    <p class="precip" data-field="precip">13%</p>
+                    <p class="wind" data-field="wind"><span class="icon wind-dir"></span>3.3m/s</p>
+                </div>
+                <div class="card-hour">
+                    <p class="hour">11:00</p>
+                    <img src=".//media/weather/partly-cloudy.svg" alt="">
+                    <p class="temp" data-field="temp">12°</p>
+                    <p class="feels" data-field="feels">14°</p>
+                    <p class="precip" data-field="precip">13%</p>
+                    <p class="wind" data-field="wind"><span class="icon wind-dir"></span>3.3m/s</p>
+                </div>
+                <div class="card-hour">
+                    <p class="hour">11:00</p>
+                    <img src=".//media/weather/partly-cloudy.svg" alt="">
+                    <p class="temp" data-field="temp">12°</p>
+                    <p class="feels" data-field="feels">14°</p>
+                    <p class="precip" data-field="precip">13%</p>
+                    <p class="wind" data-field="wind"><span class="icon wind-dir"></span>3.3m/s</p>
+                </div>
+                <div class="card-hour">
+                    <p class="hour">11:00</p>
+                    <img src=".//media/weather/partly-cloudy.svg" alt="">
+                    <p class="temp" data-field="temp">12°</p>
+                    <p class="feels" data-field="feels">14°</p>
+                    <p class="precip" data-field="precip">13%</p>
+                    <p class="wind" data-field="wind"><span class="icon wind-dir"></span>3.3m/s</p>
+                </div>
+                <div class="card-hour">
+                    <p class="hour">11:00</p>
+                    <img src=".//media/weather/partly-cloudy.svg" alt="">
+                    <p class="temp" data-field="temp">12°</p>
+                    <p class="feels" data-field="feels">14°</p>
+                    <p class="precip" data-field="precip">13%</p>
+                    <p class="wind" data-field="wind"><span class="icon wind-dir"></span>3.3m/s</p>
+                </div>
+                <div class="card-hour">
+                    <p class="hour">11:00</p>
+                    <img src=".//media/weather/partly-cloudy.svg" alt="">
+                    <p class="temp" data-field="temp">12°</p>
+                    <p class="feels" data-field="feels">14°</p>
+                    <p class="precip" data-field="precip">13%</p>
+                    <p class="wind" data-field="wind"><span class="icon wind-dir"></span>3.3m/s</p>
+                </div>
+                <div class="card-hour">
+                    <p class="hour">11:00</p>
+                    <img src=".//media/weather/partly-cloudy.svg" alt="">
+                    <p class="temp" data-field="temp">12°</p>
+                    <p class="feels" data-field="feels">14°</p>
+                    <p class="precip" data-field="precip">13%</p>
+                    <p class="wind" data-field="wind"><span class="icon wind-dir"></span>3.3m/s</p>
+                </div>
+                <div class="card-hour">
+                    <p class="hour">11:00</p>
+                    <img src=".//media/weather/partly-cloudy.svg" alt="">
+                    <p class="temp" data-field="temp">12°</p>
+                    <p class="feels" data-field="feels">14°</p>
+                    <p class="precip" data-field="precip">13%</p>
+                    <p class="wind" data-field="wind"><span class="icon wind-dir"></span>3.3m/s</p>
+                </div>
+                <div class="card-hour">
+                    <p class="hour">11:00</p>
+                    <img src=".//media/weather/partly-cloudy.svg" alt="">
+                    <p class="temp" data-field="temp">12°</p>
+                    <p class="feels" data-field="feels">14°</p>
+                    <p class="precip" data-field="precip">13%</p>
+                    <p class="wind" data-field="wind"><span class="icon wind-dir"></span>3.3m/s</p>
+                </div>
+                <div class="card-hour">
+                    <p class="hour">11:00</p>
+                    <img src=".//media/weather/partly-cloudy.svg" alt="">
+                    <p class="temp" data-field="temp">12°</p>
+                    <p class="feels" data-field="feels">14°</p>
+                    <p class="precip" data-field="precip">13%</p>
+                    <p class="wind" data-field="wind"><span class="icon wind-dir"></span>3.3m/s</p>
+                </div>
+                <div class="card-hour">
+                    <p class="hour">11:00</p>
+                    <img src=".//media/weather/partly-cloudy.svg" alt="">
+                    <p class="temp" data-field="temp">12°</p>
+                    <p class="feels" data-field="feels">14°</p>
+                    <p class="precip" data-field="precip">13%</p>
+                    <p class="wind" data-field="wind"><span class="icon wind-dir"></span>3.3m/s</p>
+                </div>
+                <div class="card-hour">
+                    <p class="hour">11:00</p>
+                    <img src=".//media/weather/partly-cloudy.svg" alt="">
+                    <p class="temp" data-field="temp">12°</p>
+                    <p class="feels" data-field="feels">14°</p>
+                    <p class="precip" data-field="precip">13%</p>
+                    <p class="wind" data-field="wind"><span class="icon wind-dir"></span>3.3m/s</p>
+                </div>
+                <div class="card-hour">
+                    <p class="hour">11:00</p>
+                    <img src=".//media/weather/partly-cloudy.svg" alt="">
+                    <p class="temp" data-field="temp">12°</p>
+                    <p class="feels" data-field="feels">14°</p>
+                    <p class="precip" data-field="precip">13%</p>
+                    <p class="wind" data-field="wind"><span class="icon wind-dir"></span>3.3m/s</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card-details secondary card" id="card-details">
+        <h4>Today's weather details</h4>
+        <div class="wrapper">
+            <div class="card-detail">
+                <p class="title"><span class="icon"></span>Feels like</p>
+                <div data-field="feels">16°</div>
+            </div>
+            <div class="card-detail">
+                <p class="title"><span class="icon"></span>Wind</p>
+                <div data-field="wind"><span class="icon"></span>3m/s</div>
+            </div>
+            <div class="card-detail">
+                <p class="title"><span class="icon"></span>Precipitation probability</p>
+                <div data-field="precipprob">10%</div>
+            </div>
+            <div class="card-detail">
+                <p class="title"><span class="icon"></span>Humidity</p>
+                <div data-field="humidity">23%</div>
+            </div>
+            <div class="card-detail">
+                <p class="title"><span class="icon"></span>UV index</p>
+                <div data-field="uv"></div>
+            </div>
+            <div class="card-detail">
+                <p class="title"><span class="icon"></span>Pressure</p>
+                <div data-field="pressure"></div>
+            </div>
+            <div class="card-detail">
+                <p class="title"><span class="icon"></span>Sunrise</p>
+                <div data-field="sunrise"></div>
+            </div>
+            <div class="card-detail">
+                <p class="title"><span class="icon"></span>Sunset</p>
+                <div data-field="sunset"></div>
+            </div>
+        </div>
+        <button id="btn-more">Show more</button>
+    </div>
+
+    <script src="../node_modules/dragscroll/dragscroll.js"></script>
 </body>
 </html>

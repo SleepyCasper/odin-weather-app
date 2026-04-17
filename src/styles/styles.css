@@ -92,6 +92,423 @@ summary {
 }
 
 /*////////////////////////////////////////////////////////*/
+
+@font-face {
+    font-family: 'Inter';
+    src: url('../fonts/Inter-Regular.woff2') format('woff2'),
+        url('../fonts/Inter-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
 * {
     /* outline: 1px solid red; */
+}
+
+html {
+    font-family: 'Inter', var(--system-ui);
+    color: var(--text-main);
+}
+
+h1 {
+    font: var(--h1-medium);
+}
+
+h2 {
+    font: var(--h2-medium);
+}
+
+h3 {
+    font: var(--h3-regular);
+}
+
+h4 {
+    font: var(--f4-regular);
+}
+
+body {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    grid-template-rows: 3rem 23rem 20rem;
+    grid-template-areas: 
+    'header header'
+    'today details'
+    'hourly hourly';
+    row-gap: 3rem;
+    column-gap: 3rem;
+    padding: 3rem;
+    background-color: var(--primary);
+}
+
+.icon {
+    display: block;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+header {
+    grid-area: header;
+    display: flex;
+    gap: 3rem;
+
+    .search {
+        position: relative;
+        background-color: var(--secondary);
+        color: inherit;
+        height: 3.2rem;
+        flex: 1;
+        max-width: 32rem;
+        margin-right: auto;
+        border-style: none;
+        border-radius: 3.1rem;
+
+        #input-search {
+            border-style: none;
+            height: 100%;
+            padding: 1rem 4rem;
+            border-radius: 3.1rem;
+            width: 100%;
+            color: inherit;
+        }
+
+        .icon {
+            position: absolute;
+            left: 1.4rem;
+            top: 1rem;
+            height: 1rem;
+            width: 1rem;
+            background-image: url(../media/icons/Search.svg);
+        }
+    }
+
+    /* The switch - the box around the slider */
+    .switch {
+      font-size: 17px;
+      position: relative;
+      display: inline-block;
+      width: 3.5em;
+      height: 2em;
+    }
+
+    /* Hide default HTML checkbox */
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    /* The slider */
+    .slider {
+      --background: #28096b;
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: var(--background);
+      transition: .5s;
+      border-radius: 30px;
+    }
+
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 1.4em;
+      width: 1.4em;
+      border-radius: 50%;
+      left: 10%;
+      bottom: 15%;
+      box-shadow: inset 8px -4px 0px 0px #fff000;
+      background: var(--background);
+      transition: .5s;
+    }
+
+    input:checked + .slider {
+      background-color: var(--accent);
+    }
+
+    input:checked + .slider:before {
+      transform: translateX(100%);
+      box-shadow: inset 15px -4px 0px 15px #fff000;
+    }
+}
+
+.secondary {
+    background-color: var(--secondary);
+}
+
+.card {
+    min-width: 20rem;
+    border-radius: 2.5rem;
+}
+
+.card-today {
+    grid-area: today;
+    display: flex;
+    justify-content: space-between;
+    padding: 1.8rem;
+    min-width: max-content;
+
+    .left {
+        display: flex;
+        flex-direction: column;
+        gap: 2.2rem;
+        align-items: start;
+        justify-content: start;
+
+        .wrapper.date {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+    }
+
+    .right {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: end;
+
+        #today-icon {
+            height: 12.5rem;
+        }
+    }
+
+    .title-city {
+        display: flex;
+        gap: 0.6rem;
+        background-color: var(--accent);
+        padding: 0.6rem 0.8rem;
+        width: max-content;
+        border-radius: 3.1rem;
+
+        .icon {
+            background-image: url('../media/icons/location.svg');
+            height: 1rem;
+            width: 1rem;
+        }
+    }
+}
+
+#btn-toggle-deg {
+    position: relative;
+    display: flex;
+    justify-content: space-around;
+    background-color: var(--text-main);
+    color: var(--primary);
+    width: 5.5rem;
+    height: 2.5rem;
+    padding: 0.6rem 0;
+    border-radius: 2.5rem;
+    border-style: none;
+    cursor: pointer;
+
+    div {
+        pointer-events: none;
+    }
+
+    div.active {
+        color: var(--text-main);
+    }
+}
+
+#btn-toggle-deg::after {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 3.3rem;
+    background-color: var(--primary);
+    color: var(--text-main);
+    border-radius: 2.5rem;
+    text-align: center;
+    align-content: center;
+    pointer-events: none;
+    transition: transform 0.15s ease;
+}
+
+#btn-toggle-deg.f::after {
+    content: "F";
+    transform: translateX(2.2rem);
+
+}
+
+#btn-toggle-deg.c::after {
+    content: "C";
+    transform: translateX(0);
+}
+
+
+.card-hourly {
+    grid-area: hourly;
+    padding: 1.7rem;
+
+    #toggle-hourly {
+        margin-bottom: 0.5rem;
+    }
+
+    #toggle-hourly a {
+        text-decoration: none;
+        color: var(--text-main);
+        padding: 0 0.3rem;
+    }
+
+    #toggle-hourly a:hover {
+        text-decoration: underline;
+    }
+
+    #toggle-hourly a.active {
+        text-decoration: underline;
+    }
+}
+
+.container-hourly {
+    display: grid;
+    grid-template-rows: 0.8rem 1fr 2fr 1fr 1fr 1fr 1fr 0.8rem;
+    grid-template-columns: 6rem auto;
+    height: 90%;
+
+    .container-details {
+        display: grid;
+        grid-template-rows: subgrid;
+        align-items: center;
+        grid-row: 4 / 8;
+        font-size: 0.8rem;
+        color: var(--text-secondary);
+    }
+
+    .container-details:has( + #wrapper-week.active) {
+        grid-row: 5 / 8;
+    }
+
+    .wrapper.hours,
+    .wrapper.week
+     {
+        display: none;
+        grid-template-rows: subgrid;
+        column-gap: 1rem;
+        grid-row: 1 / 9;
+        overflow-x: scroll;
+        user-select: none;
+        cursor: grab;
+        scroll-snap-type: none;
+
+        .card-hour,
+        .card-day {
+            display: grid;
+            grid-template-rows: subgrid;
+            grid-row: 1 / 9;
+            align-items: center;
+            justify-items: center;
+            justify-content: center;
+            height: 100%;
+            width: 7rem;
+            min-width: 7rem;
+            background-color: var(--tertiary);
+            border-radius: 1.5rem;
+            
+            img {
+                height: 3rem;
+            }
+        }
+
+        .card-day { 
+            .temp {
+                grid-row: 5 / 6;
+            }
+            .precip {
+                grid-row: 6 / 7;
+            }
+            .wind {
+                grid-row: 7 / 8;
+            }
+        }
+
+
+        .card-hour::before,
+        .card-hour::after,
+        .card-day::before,
+        .card-day::after {
+            content: '';
+        }
+    }
+
+    .wrapper::-webkit-scrollbar {
+        display: none;
+    }
+
+    
+
+    .wrapper.active {
+        display: grid;
+    }
+}
+
+.card-details {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: 1.2rem 1.4rem;
+    overflow-y: hidden;
+
+    h4 {
+        margin-bottom: 1.1rem;
+    }
+
+    .wrapper {
+        display: grid;
+        flex: 1;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto;
+        gap: 1.2rem;
+
+        div[class*='card'] {
+            display: flex;
+            flex-direction: column;
+            background-color: var(--tertiary);
+            border-radius: 1.25rem;
+            height: 8.6rem;
+            padding: 0.6rem 1.2rem;
+
+            p {
+                font-size: 0.9rem;
+                justify-self: start;
+            }
+
+            div {
+                font-size: 2rem;
+                justify-self: center;
+                text-align: center;
+                align-content: center;
+                flex: 1;
+            }
+        }
+    }
+
+    button {
+        position: absolute;
+        right: 1.6rem;
+        padding: 0.4em 0.7em;
+        font-size: 0.8rem;
+        border-radius: 1rem;
+        color: var(--text-main);
+        background-color: var(--accent);
+        border-style: none;
+    }
+
+    button:hover {
+        background-color: var(--hover-accent);
+    }
+}
+
+.card-details.expanded {
+    grid-row: 2 / span 2;
+}
+
+.card-hourly.shrank {
+    grid-column: 1 / span 1;
 }
