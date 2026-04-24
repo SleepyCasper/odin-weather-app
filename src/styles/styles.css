@@ -163,6 +163,7 @@ header {
         margin-right: auto;
         border-style: none;
         border-radius: 3.1rem;
+        z-index: 2;
 
         #input-search {
             border-style: none;
@@ -171,6 +172,25 @@ header {
             border-radius: 3.1rem;
             width: 100%;
             color: inherit;
+        }
+
+        #dropdown-search {
+            margin-top: 0.5rem;
+            list-style: none;
+            background-color: var(--secondary);
+            border-radius: 1.5rem;
+            max-height: 15rem;
+            overflow-y: scroll;
+            box-shadow: 0 0 10px 4px var(--primary);
+
+            li {
+                cursor: pointer;
+                padding: 0.8rem 1rem;
+            }
+
+            li:hover {
+                background-color: var(--hover-secondary);
+            }
         }
 
         .icon {
@@ -412,7 +432,8 @@ header {
             border-radius: 1.5rem;
             
             img {
-                height: 3rem;
+                height: 4.5rem;
+                cursor: pointer;
             }
         }
 
@@ -475,8 +496,48 @@ header {
             padding: 0.6rem 1.2rem;
 
             p {
+                display: flex;
+                gap: 0.5rem;
+                align-items: center;
                 font-size: 0.9rem;
                 justify-self: start;
+            }
+
+            p > .icon {
+                height: 1.5rem;
+                width: 1.5rem;
+            }
+
+            .feels .icon {
+                background-image: url(../media/icons/feels-like.svg);
+            }
+
+            .wind .icon {
+                background-image: url(../media/icons/wind.svg);
+            }
+
+            .precipprob .icon {
+                background-image: url(../media/icons/rain.svg);
+            }
+
+            .humidity .icon {
+                background-image: url(../media/icons/humidity.svg);
+            }
+
+            .uvindex .icon {
+                background-image: url(../media/icons/uv.svg);
+            }
+
+            .pressure .icon {
+                background-image: url(../media/icons/pressure.svg);
+            }
+
+            .sunrise .icon {
+                background-image: url(../media/icons/sunrise.svg);
+            }
+
+            .sunset .icon {
+                background-image: url(../media/icons/sunset.svg);
             }
 
             div {

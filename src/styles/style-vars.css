@@ -7,10 +7,19 @@
    --text-main: hsl(0, 0%, 100%);
    --text-secondary: hsl(220, 6%, 43%);
    --accent: hsl(263, 84%, 55%);
+   --hover-secondary: hsl(221, 40%, 14%);
    --hover-accent: hsl(263, 84%, 60%);
 
    --h1-medium: normal 500 4rem 'Inter', var(--system-ui);
    --h2-medium: normal 500 2.5rem 'Inter', var(--system-ui);
    --h3-regular: normal 400 2rem 'Inter', var(--system-ui);
    --h4-regular: normal 400 1.25rem 'Inter', var(--system-ui);  
+
+   /* Icon colors */
+   --dark-grey: #868686;
+   --grey: #bfbfbf;
+   --light-grey: #e6e6e6;
+   --blue: #45abff;
+   --yellow: #ffda69;
+   --orange: #ffaa45
 }

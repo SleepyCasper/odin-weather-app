@@ -10,25 +10,26 @@
         <div class="search">
             <span class="icon"></span>
             <input class="secondary" id="input-search" type="text" placeholder="Search city...">
+            <ul id="dropdown-search"></ul>
         </div>
-        <!-- <button id="btn-toggle-theme" class="btn" type="button"></button> -->
+        
         <label class="switch" id="toggle-theme">
             <input type="checkbox">
             <span class="slider"></span>
         </label>
     </header>
 
-    <div class="card-today secondary card">
+    <div class="card-today secondary card" id="card-today">
         <div class="left">
-            <div class="title-city" id="title-city" data-field="city"><span class="icon"></span>Kyiv</div>
+            <div class="title-city" id="title-city" data-field="city"><span class="icon"></span></div>
             
             <div class="wrapper date">
-                <h2 id="today-day" data-field="day">Monday</h2>
-                <div class="date" id="today-date" data-field="date">12 Apr, 2026</div>
+                <h2 id="today-day" data-field="day"></h2>
+                <div class="date" id="today-date" data-field="date"></div>
             </div>
             <div class="wrapper temp">
-                <h1 id="today-temp" data-field="temp">21°C</h1>
-                <div id="today-min-max" data-field="min-max">Min: 10° Max: 24°</div>
+                <h1 id="today-temp" data-field="temp"></h1>
+                <div id="today-min-max" data-field="min-max"></div>
             </div>
         </div>
         <div class="right">
@@ -36,13 +37,13 @@
                 <div class="active" id="cel">C</div>
                 <div id="far">F</div>
             </button>
-            <img class="icon" id="today-icon" src="./media/weather/partly-cloudy.svg" alt="Today's weather">
-            <h3 class="visib" data-field="condition">Cloudy</h3>
+            <img src="#" class="icon" id="today-icon" alt="Today's weather">
+            <h3 class="visib" id="today-condition" data-field="condition"></h3>
         </div>
     </div>
     <div class="card-hourly secondary card" id="card-hourly">
         <div id="toggle-hourly">
-            <h4><a href="#" class="active today">Today</a>/<a href="#" class="week">Week</a></h4>
+            <h4><a href="#" class="active today">Hours</a>/<a href="#" class="week">Week</a></h4>
         </div>
         <div class="container-hourly" id="container-hourly">
             <div class="container-details" id="container-details">
@@ -53,144 +54,11 @@
             </div>
             
             <div class="wrapper week dragscroll" id="wrapper-week">
-                <div class="card-day">
-                    <p class="day" data-field="day">Monday</p>
-                    <img src=".//media/weather/partly-cloudy.svg" data-field="condition">
-                    <p class="temp" data-field="min-max">↓10° ↑24°</p>
-                    <p class="precip" data-field="precip">13%</p>
-                    <p class="wind" data-field="wind"><span class="icon wind-dir"></span>1.2m/s</p>
-                </div>
+                
             </div>
 
             <div class="wrapper hours dragscroll active" id="wrapper-hours">
-                <div class="card-hour">
-                    <p class="hour" data-field="hour">11:00</p>
-                    <img src=".//media/weather/partly-cloudy.svg" alt="" data-field="condition">
-                    <p class="temp" data-field="temp">12°</p>
-                    <p class="feels" data-field="feels">14°</p>
-                    <p class="precip" data-field="precip">13%</p>
-                    <p class="wind" data-field="wind"><span class="icon wind-dir"></span>3.3m/s</p>
-                </div>
-                <div class="card-hour">
-                    <p class="hour">11:00</p>
-                    <img src=".//media/weather/partly-cloudy.svg" alt="">
-                    <p class="temp" data-field="temp">12°</p>
-                    <p class="feels" data-field="feels">14°</p>
-                    <p class="precip" data-field="precip">13%</p>
-                    <p class="wind" data-field="wind"><span class="icon wind-dir"></span>3.3m/s</p>
-                </div>
-                <div class="card-hour">
-                    <p class="hour">11:00</p>
-                    <img src=".//media/weather/partly-cloudy.svg" alt="">
-                    <p class="temp" data-field="temp">12°</p>
-                    <p class="feels" data-field="feels">14°</p>
-                    <p class="precip" data-field="precip">13%</p>
-                    <p class="wind" data-field="wind"><span class="icon wind-dir"></span>3.3m/s</p>
-                </div>
-                <div class="card-hour">
-                    <p class="hour">11:00</p>
-                    <img src=".//media/weather/partly-cloudy.svg" alt="">
-                    <p class="temp" data-field="temp">12°</p>
-                    <p class="feels" data-field="feels">14°</p>
-                    <p class="precip" data-field="precip">13%</p>
-                    <p class="wind" data-field="wind"><span class="icon wind-dir"></span>3.3m/s</p>
-                </div>
-                <div class="card-hour">
-                    <p class="hour">11:00</p>
-                    <img src=".//media/weather/partly-cloudy.svg" alt="">
-                    <p class="temp" data-field="temp">12°</p>
-                    <p class="feels" data-field="feels">14°</p>
-                    <p class="precip" data-field="precip">13%</p>
-                    <p class="wind" data-field="wind"><span class="icon wind-dir"></span>3.3m/s</p>
-                </div>
-                <div class="card-hour">
-                    <p class="hour">11:00</p>
-                    <img src=".//media/weather/partly-cloudy.svg" alt="">
-                    <p class="temp" data-field="temp">12°</p>
-                    <p class="feels" data-field="feels">14°</p>
-                    <p class="precip" data-field="precip">13%</p>
-                    <p class="wind" data-field="wind"><span class="icon wind-dir"></span>3.3m/s</p>
-                </div>
-                <div class="card-hour">
-                    <p class="hour">11:00</p>
-                    <img src=".//media/weather/partly-cloudy.svg" alt="">
-                    <p class="temp" data-field="temp">12°</p>
-                    <p class="feels" data-field="feels">14°</p>
-                    <p class="precip" data-field="precip">13%</p>
-                    <p class="wind" data-field="wind"><span class="icon wind-dir"></span>3.3m/s</p>
-                </div>
-                <div class="card-hour">
-                    <p class="hour">11:00</p>
-                    <img src=".//media/weather/partly-cloudy.svg" alt="">
-                    <p class="temp" data-field="temp">12°</p>
-                    <p class="feels" data-field="feels">14°</p>
-                    <p class="precip" data-field="precip">13%</p>
-                    <p class="wind" data-field="wind"><span class="icon wind-dir"></span>3.3m/s</p>
-                </div>
-                <div class="card-hour">
-                    <p class="hour">11:00</p>
-                    <img src=".//media/weather/partly-cloudy.svg" alt="">
-                    <p class="temp" data-field="temp">12°</p>
-                    <p class="feels" data-field="feels">14°</p>
-                    <p class="precip" data-field="precip">13%</p>
-                    <p class="wind" data-field="wind"><span class="icon wind-dir"></span>3.3m/s</p>
-                </div>
-                <div class="card-hour">
-                    <p class="hour">11:00</p>
-                    <img src=".//media/weather/partly-cloudy.svg" alt="">
-                    <p class="temp" data-field="temp">12°</p>
-                    <p class="feels" data-field="feels">14°</p>
-                    <p class="precip" data-field="precip">13%</p>
-                    <p class="wind" data-field="wind"><span class="icon wind-dir"></span>3.3m/s</p>
-                </div>
-                <div class="card-hour">
-                    <p class="hour">11:00</p>
-                    <img src=".//media/weather/partly-cloudy.svg" alt="">
-                    <p class="temp" data-field="temp">12°</p>
-                    <p class="feels" data-field="feels">14°</p>
-                    <p class="precip" data-field="precip">13%</p>
-                    <p class="wind" data-field="wind"><span class="icon wind-dir"></span>3.3m/s</p>
-                </div>
-                <div class="card-hour">
-                    <p class="hour">11:00</p>
-                    <img src=".//media/weather/partly-cloudy.svg" alt="">
-                    <p class="temp" data-field="temp">12°</p>
-                    <p class="feels" data-field="feels">14°</p>
-                    <p class="precip" data-field="precip">13%</p>
-                    <p class="wind" data-field="wind"><span class="icon wind-dir"></span>3.3m/s</p>
-                </div>
-                <div class="card-hour">
-                    <p class="hour">11:00</p>
-                    <img src=".//media/weather/partly-cloudy.svg" alt="">
-                    <p class="temp" data-field="temp">12°</p>
-                    <p class="feels" data-field="feels">14°</p>
-                    <p class="precip" data-field="precip">13%</p>
-                    <p class="wind" data-field="wind"><span class="icon wind-dir"></span>3.3m/s</p>
-                </div>
-                <div class="card-hour">
-                    <p class="hour">11:00</p>
-                    <img src=".//media/weather/partly-cloudy.svg" alt="">
-                    <p class="temp" data-field="temp">12°</p>
-                    <p class="feels" data-field="feels">14°</p>
-                    <p class="precip" data-field="precip">13%</p>
-                    <p class="wind" data-field="wind"><span class="icon wind-dir"></span>3.3m/s</p>
-                </div>
-                <div class="card-hour">
-                    <p class="hour">11:00</p>
-                    <img src=".//media/weather/partly-cloudy.svg" alt="">
-                    <p class="temp" data-field="temp">12°</p>
-                    <p class="feels" data-field="feels">14°</p>
-                    <p class="precip" data-field="precip">13%</p>
-                    <p class="wind" data-field="wind"><span class="icon wind-dir"></span>3.3m/s</p>
-                </div>
-                <div class="card-hour">
-                    <p class="hour">11:00</p>
-                    <img src=".//media/weather/partly-cloudy.svg" alt="">
-                    <p class="temp" data-field="temp">12°</p>
-                    <p class="feels" data-field="feels">14°</p>
-                    <p class="precip" data-field="precip">13%</p>
-                    <p class="wind" data-field="wind"><span class="icon wind-dir"></span>3.3m/s</p>
-                </div>
+                
             </div>
         </div>
     </div>
@@ -199,35 +67,35 @@
         <h4>Today's weather details</h4>
         <div class="wrapper">
             <div class="card-detail">
-                <p class="title"><span class="icon"></span>Feels like</p>
-                <div data-field="feels">16°</div>
+                <p class="title feels"><span class="icon"></span>Feels like</p>
+                <div data-field="feels"></div>
             </div>
             <div class="card-detail">
-                <p class="title"><span class="icon"></span>Wind</p>
-                <div data-field="wind"><span class="icon"></span>3m/s</div>
+                <p class="title wind"><span class="icon"></span>Wind</p>
+                <div data-field="windspeed"><span class="icon"></span></div>
             </div>
             <div class="card-detail">
-                <p class="title"><span class="icon"></span>Precipitation probability</p>
-                <div data-field="precipprob">10%</div>
+                <p class="title precipprob"><span class="icon"></span>Precipitation probability</p>
+                <div data-field="precipprob"></div>
             </div>
             <div class="card-detail">
-                <p class="title"><span class="icon"></span>Humidity</p>
-                <div data-field="humidity">23%</div>
+                <p class="title humidity"><span class="icon"></span>Humidity</p>
+                <div data-field="humidity"></div>
             </div>
             <div class="card-detail">
-                <p class="title"><span class="icon"></span>UV index</p>
-                <div data-field="uv"></div>
+                <p class="title uvindex"><span class="icon"></span>UV index</p>
+                <div data-field="uvindex"></div>
             </div>
             <div class="card-detail">
-                <p class="title"><span class="icon"></span>Pressure</p>
+                <p class="title pressure"><span class="icon"></span>Pressure</p>
                 <div data-field="pressure"></div>
             </div>
             <div class="card-detail">
-                <p class="title"><span class="icon"></span>Sunrise</p>
+                <p class="title sunrise"><span class="icon"></span>Sunrise</p>
                 <div data-field="sunrise"></div>
             </div>
             <div class="card-detail">
-                <p class="title"><span class="icon"></span>Sunset</p>
+                <p class="title sunset"><span class="icon"></span>Sunset</p>
                 <div data-field="sunset"></div>
             </div>
         </div>
