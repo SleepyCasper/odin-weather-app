@@ -2,11 +2,11 @@ import { Render } from "./render";
 import { Elements } from "./elements";
 import { weatherStore } from "./store";
 import { parseWeatherData } from "./parser";
-import { formatTemp, debounce } from "./utils";
+import { debounce, t  } from "./utils";
 
 export const EventHandler = {
-    isCelsius: true,
     isHourly: true,
+    lastResults: [],
 
     init() {
         this._HandleGlobalUI();
@@ -18,7 +18,8 @@ export const EventHandler = {
     _HandleSearch() {
         Elements.searchBar.addEventListener("input", async (e) => {
             const results = await _getLocations(e);
-            // console.log(results);
+            this.lastResults = results || [];
+            console.log(this.lastResults);
             Render.renderDropdown(results);
         })
 
@@ -34,30 +35,39 @@ export const EventHandler = {
                 return;
             }
 
+            const lat = localStorage.getItem("lat") || 50.450001; // default Kyiv
+            const lon = localStorage.getItem("lon") || 30.523333;
+            const bias = `proximity:${lon},${lat}|countrycode:ua`;
+
             const response = await fetch(
-              `https://photon.komoot.io/api/?q=${inputValue}&limit=8&osm_tag=place:city&osm_tag=place:village&osm_tag=place:hamlet&lang=en`
+              `https://api.geoapify.com/v1/geocode/autocomplete?text=${inputValue}&type=locality&bias=${encodeURIComponent(bias)}&limit=20&lang=${weatherStore.lang}&format=json&apiKey=2e4afcb0e2314c85a3e5dbd086fda082`
             );
             const data = await response.json();
-            const results = data.features.map(f => {
-                const p = f.properties;
-                let parts;
-                if(p.osm_value === "city") {
-                    parts = [p.name, p.state, p.country].filter(Boolean);
-                } else {
-                    parts = [p.name, p.county, p.state, p.country].filter(Boolean);
-                }
+            console.log(data)
+            const ALLOWED_TYPES = ["city", "suburb", "district"];
 
-                return {
-                    id: crypto.randomUUID(),
-                    name: p.name,
-                    coordinates: {
-                        lon: f.geometry.coordinates[0],
-                        lat: f.geometry.coordinates[1]
-                    },
-                    string: parts.join(", ")
-                };
-            });
-            return results;
+            return data.results
+                .filter(p => ALLOWED_TYPES.includes(p.result_type))
+                .filter(p => p.country_code !== "ru")
+                .slice(0, 10)
+                .map(p => {
+                    let name = p.city;
+                    if(p.hamlet || p.village || p.name) {
+                        name = p.hamlet || p.village || p.name;
+                    }
+
+                    let parts = [name, p.district, p.state, p.country];
+
+                    return {
+                        id: crypto.randomUUID(),
+                        name,
+                        coordinates: {
+                            lat: p.lat,
+                            lon: p.lon,
+                        },
+                        string: parts.filter(Boolean).join(", "),
+                    };
+                });
         }
     },
 
@@ -65,10 +75,20 @@ export const EventHandler = {
         Elements.dropdown.addEventListener("click", (e) => {
             const selected = e.target.closest("li");
             if (selected) {
+                this.lastResults = [];
+                console.log(this.lastResults)
+                Elements.searchBar.placeholder = selected.textContent;
+                Elements.searchBar.value = "";
+                Elements.dropdown.style.display = "none";
+
                 const lat = selected.dataset.lat;
                 const lon = selected.dataset.lon;
                 const city = selected.dataset.city;
                 this._GetData(lat, lon).then(() => {
+                    weatherStore.city = city;
+                    localStorage.setItem("city", city);
+                    localStorage.setItem("lat", lat);
+                    localStorage.setItem("lon", lon);
                     Render.renderToday(city);
                     Render.renderDetails();
                     Render.renderHourly();
@@ -79,11 +99,9 @@ export const EventHandler = {
 
     // Get data from VisualCrossing
     async _GetData (lat, lon) {
-        const response = await fetch(`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${lat},${lon}/next24hours/next7days?unitGroup=metric&elements=add%3AresolvedAddress%2Cremove%3AdatetimeEpoch%2Cremove%3Adew%2Cremove%3Amoonphase%2Cremove%3Aprecipcover%2Cremove%3Asevererisk%2Cremove%3Asnow%2Cremove%3Asnowdepth%2Cremove%3Asolarenergy%2Cremove%3Asolarradiation%2Cremove%3Asource%2Cremove%3Astations%2Cremove%3Avisibility%2Cremove%3Awindgust&key=7GBX57KDVY7Q9UARZPZP5DCHY&contentType=json`);
+        const response = await fetch(`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${lat},${lon}/next24hours/next15days?unitGroup=metric&elements=add%3AresolvedAddress%2Cremove%3AdatetimeEpoch%2Cremove%3Adew%2Cremove%3Amoonphase%2Cremove%3Aprecipcover%2Cremove%3Asevererisk%2Cremove%3Asnow%2Cremove%3Asnowdepth%2Cremove%3Asolarenergy%2Cremove%3Asolarradiation%2Cremove%3Asource%2Cremove%3Astations%2Cremove%3Avisibility%2Cremove%3Awindgust&key=7GBX57KDVY7Q9UARZPZP5DCHY&contentType=json`);
         const data = await response.json();
-        console.log(data);
         parseWeatherData(data);
-        console.log(weatherStore);
     },
 
     _HandleGlobalUI () {
@@ -94,34 +112,33 @@ export const EventHandler = {
 
             if (e.target.classList.contains("c")) {
                 e.target.classList.replace("c", "f");
-                this.isCelsius = false;
-                return;
-            }
-
-            if (e.target.classList.contains("f")) {
+                weatherStore.isCelsius = false;
+                localStorage.setItem("isCelsius", false);
+            } else if (e.target.classList.contains("f")) {
                 e.target.classList.replace("f", "c");
-                this.isCelsius = true
+                weatherStore.isCelsius = true;
+                localStorage.setItem("isCelsius", true);
             }
 
-            // re-render cards here
+            Render.renderToday(weatherStore.city);
+            if (this.isHourly) {
+                Render.renderHourly();
+            } else { Render.renderWeek()}
+            Render.renderDetails();
         })
 
         //Hide/show search dropdown
-        document.addEventListener("click", (e) => {
-            const clickedInsideBar = e.target.closest("#input-search");
-
-            if (clickedInsideBar) {
-                if (Elements.searchBar.value === "") return;
-
-                console.log("Click on input")
-                Elements.dropdown.style.display = "block";
-                return;
+        Elements.searchBar.addEventListener("focus", () => {
+            if (this.lastResults.length > 0) {
+                Render.renderDropdown(this.lastResults);
             }
+        });
 
-            console.log("Click outside");
-            Elements.dropdown.style.display = "none";
-        })
-
+        Elements.searchBar.addEventListener("blur", () => {
+            setTimeout(() => {
+                Elements.dropdown.style.display = "none";
+            }, 150);
+        });
         //Toggle hourly/week
         Elements.globalBtns.btnToggleHourly.addEventListener("click", (e) => {
             e.preventDefault();
@@ -160,14 +177,38 @@ export const EventHandler = {
             }
         })
 
+        // Toggle details
         Elements.globalBtns.btnMore.addEventListener("click", (e) => {
             Elements.cardDetails.card.classList.toggle("expanded");
             Elements.cardHourly.card.classList.toggle("shrank");
-            if (Elements.cardDetails.card.classList.contains("expanded")) {
-                e.target.textContent = "Show less";
-            } else {
-                e.target.textContent = "Show more";
-            }
+            e.target.textContent = Elements.cardDetails.card.classList.contains("expanded")
+                    ? t("showLess")
+                    : t("showMore");
         })
+
+        //Switch theme 
+        Elements.globalBtns.btnTheme.addEventListener("click", (e) => {
+            Render.toggleTheme(e.target);
+        })
+
+        // Toggle language
+        Elements.globalBtns.btnToggleLang.addEventListener("click", () => {
+            const newLang = weatherStore.lang === "en" ? "uk" : "en";
+            weatherStore.lang = newLang;
+            localStorage.setItem("lang", newLang);
+
+            // Update button label
+            Elements.globalBtns.btnToggleLang.textContent = newLang === "en" ? "UA" : "EN";
+
+            // Re-render everything
+            Render.renderStaticUI();
+            Render.renderToday(weatherStore.city);
+            Render.renderDetails();
+            if (this.isHourly) {
+                Render.renderHourly();
+            } else {
+                Render.renderWeek();
+            }
+        });
     }
 }

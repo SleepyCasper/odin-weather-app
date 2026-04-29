@@ -6,6 +6,8 @@ export const Elements = {
         btnToggleDeg: document.getElementById("btn-toggle-deg"),
         btnToggleHourly: document.getElementById("toggle-hourly"),
         btnMore: document.getElementById("btn-more"),
+        btnTheme: document.getElementById("toggle-theme"),
+        btnToggleLang: document.getElementById("btn-toggle-lang"),
     },
 
     cardToday: {

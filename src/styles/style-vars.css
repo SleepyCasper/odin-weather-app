@@ -23,3 +23,11 @@
    --yellow: #ffda69;
    --orange: #ffaa45
 }
+
+:root.light {
+   --primary: hsl(221, 49%, 90%);
+   --secondary: hsl(221, 49%, 95%);
+   --tertiary: hsl(0, 0%, 100%);
+   --text-main: hsl(224, 61%, 6%);
+   --text-secondary: hsl(220, 6%, 43%);
+}

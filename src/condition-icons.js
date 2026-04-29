@@ -1,3 +1,5 @@
+import { parseCondition } from "./utils";
+
 const BASE = "/media/weather/";
 
 const CONDITION_MAP = {
@@ -49,7 +51,8 @@ const CONDITION_MAP = {
 const FALLBACK = "sun.svg";
 
 export function getWeatherIcon(condition, isDay = true) {
-    const entry = CONDITION_MAP[condition] ?? FALLBACK;
+    const parsed = parseCondition(condition)
+    const entry = CONDITION_MAP[parsed] ?? FALLBACK;
 
     if (Array.isArray(entry)) {
         return BASE + (isDay ? entry[0] : entry[1]);

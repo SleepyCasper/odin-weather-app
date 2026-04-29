@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg width="800px" height="800px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <g id="SVGRepo_bgCarrier" stroke-width="0"/>
+  <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/>
+  <g id="SVGRepo_iconCarrier">
+    <path d="M 22.046 11.958 L 2.046 11.958" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="stroke: rgb(249, 255, 250); transform-box: fill-box; transform-origin: 50% 50%;" transform="matrix(0.707107, 0.707107, -0.707107, 0.707107, 0, 0)"/>
+    <path d="M 10.05 14.05 L 4.89 9.05 C 4.618 8.793 4.401 8.483 4.253 8.139 C 4.104 7.795 4.028 7.425 4.028 7.05 C 4.028 6.676 4.104 6.305 4.253 5.961 C 4.401 5.617 4.618 5.307 4.89 5.05 L 10.05 0.05" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="transform-box: fill-box; transform-origin: 50% 50%;" transform="matrix(0.707107, 0.707107, -0.707107, 0.707107, 0, 0)"/>
+  </g>
+</svg>

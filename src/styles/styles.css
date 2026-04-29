@@ -111,6 +111,22 @@ html {
     color: var(--text-main);
 }
 
+html.light #title-city,
+html.light #btn-more,
+html.light #btn-toggle-lang {
+    color: var(--tertiary);
+}
+
+html.light .icon:not(#today-icon,
+#title-city .icon) {
+    filter: brightness(0) saturate(100%)
+}
+
+html.light #btn-toggle-deg::after {
+    background-color: var(--tertiary);
+    color: var(--text-main);
+}
+
 h1 {
     font: var(--h1-medium);
 }
@@ -128,17 +144,55 @@ h4 {
 }
 
 body {
+    
+    background-color: var(--primary);
+}
+
+#layout {
     display: grid;
-    grid-template-columns: 1.4fr 1fr;
+    grid-template-columns: 1.4fr minmax(10rem, 1fr);
     grid-template-rows: 3rem 23rem 20rem;
     grid-template-areas: 
     'header header'
     'today details'
     'hourly hourly';
-    row-gap: 3rem;
-    column-gap: 3rem;
-    padding: 3rem;
-    background-color: var(--primary);
+    gap: clamp(1rem, calc(0.426rem + 2.86vw), 3rem);
+    
+    padding: clamp(1rem, calc(0.426rem + 2.86vw), 3rem);
+}
+
+@media (max-width: 64rem) {
+    #layout {
+        grid-template-columns: 1fr;
+        grid-template-rows: 3rem auto 23rem auto 20rem;
+        grid-template-areas: 
+            'header'
+            'today'
+            'details'
+            'details2'
+            'hourly';
+    }
+
+    #card-hourly {
+        margin-top: -4%;
+    }
+
+    #card-details {
+        grid-area: details;
+        .wrapper {
+            display: flex;
+            flex-wrap: wrap;
+
+            .card-detail {
+                flex: 1;
+                min-width: 10rem;
+            }
+        }
+    }
+
+    #card-details.expanded {
+        grid-row: 3 / span 2;
+    }
 }
 
 .icon {
@@ -151,7 +205,8 @@ body {
 header {
     grid-area: header;
     display: flex;
-    gap: 3rem;
+    gap: 1.2rem;
+    align-items: center;
 
     .search {
         position: relative;
@@ -201,6 +256,14 @@ header {
             width: 1rem;
             background-image: url(../media/icons/Search.svg);
         }
+    }
+
+    #btn-toggle-lang {
+        padding: 0.5rem 0.8rem;
+        border-radius: 2.5rem;
+        border-style: none;
+        background-color: var(--accent);
+        color: var(--text-main);
     }
 
     /* The switch - the box around the slider */
@@ -268,9 +331,24 @@ header {
 .card-today {
     grid-area: today;
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
-    padding: 1.8rem;
-    min-width: max-content;
+    padding: 1.8rem 5%;
+    gap: 1rem;
+    min-width: fit-content;
+
+    .up {
+        flex: 1;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .main {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 2rem;
+    }
 
     .left {
         display: flex;
@@ -278,22 +356,31 @@ header {
         gap: 2.2rem;
         align-items: start;
         justify-content: start;
+        
+        flex: 1;
 
         .wrapper.date {
             display: flex;
             flex-direction: column;
             gap: 0.5rem;
         }
+
     }
 
     .right {
         display: flex;
         flex-direction: column;
         justify-content: space-between;
+        text-align: end;
         align-items: end;
+        
+        flex-shrink: 0;
+        flex: 1;
 
         #today-icon {
-            height: 12.5rem;
+            height: 10rem;
+            width: 10rem;
+            background-size: 12.5rem;
         }
     }
 
@@ -303,6 +390,7 @@ header {
         background-color: var(--accent);
         padding: 0.6rem 0.8rem;
         width: max-content;
+        height: fit-content;
         border-radius: 3.1rem;
 
         .icon {
@@ -313,10 +401,68 @@ header {
     }
 }
 
+@media screen and (max-width: 480px){
+    html {
+        font-size: 0.8rem;
+    }
+
+    header {
+        gap: 1rem;
+    }
+
+    .card-today {
+        text-align: center;
+        .left {
+            align-items: center;
+
+            .wrapper {
+                align-items: center;
+            }
+
+            .wrapper.temp {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+        }
+
+        .right {
+            align-items: center;
+            text-align: center;
+        }
+    }
+
+    .card-details {
+        
+    }
+
+    #card-hourly {
+
+        .container-hourly {
+            grid-template-columns: auto;
+
+            .wrapper {
+                gap: 0.5rem;
+            }
+        }
+
+        #container-details {
+            display: none;
+        }
+
+        .card-hour {
+            p.feels {
+                color: var(--text-secondary);
+            }
+        }
+    }
+}
+
 #btn-toggle-deg {
     position: relative;
     display: flex;
     justify-content: space-around;
+    
     background-color: var(--text-main);
     color: var(--primary);
     width: 5.5rem;
@@ -338,10 +484,10 @@ header {
 #btn-toggle-deg::after {
     display: block;
     position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 3.3rem;
+    top: -0.063rem;
+    left: -0.063rem;
+    height: 2.625rem;
+    width: 3.4rem;
     background-color: var(--primary);
     color: var(--text-main);
     border-radius: 2.5rem;
@@ -410,7 +556,8 @@ header {
      {
         display: none;
         grid-template-rows: subgrid;
-        column-gap: 1rem;
+        justify-content: start;
+        column-gap: 0.8rem;
         grid-row: 1 / 9;
         overflow-x: scroll;
         user-select: none;
@@ -434,6 +581,27 @@ header {
             img {
                 height: 4.5rem;
                 cursor: pointer;
+            }
+
+            .date {
+                font-size: 0.9rem;
+            }
+
+            .wind {
+                display: flex;
+                gap: 0.2rem;
+
+                .icon {
+                    height: 1rem;
+                    width: 1rem;
+                }
+            }
+
+            p.temp,
+            p.feels,
+            p.precip,
+            p.wind {
+                font-size: 0.9rem;
             }
         }
 
@@ -470,14 +638,18 @@ header {
 }
 
 .card-details {
+    --padding-width: 1.4rem;
+    --btn-width: 5.5rem;
     position: relative;
     display: flex;
     flex-direction: column;
-    padding: 1.2rem 1.4rem;
+    padding: 1.2rem var(--padding-width);
     overflow-y: hidden;
-
+    min-width: fit-content;
+    
     h4 {
         margin-bottom: 1.1rem;
+        max-width: 50%;
     }
 
     .wrapper {
@@ -518,6 +690,8 @@ header {
 
             .precipprob .icon {
                 background-image: url(../media/icons/rain.svg);
+                background-size: 1.5rem;
+                padding: 0.5rem;
             }
 
             .humidity .icon {
@@ -547,12 +721,24 @@ header {
                 align-content: center;
                 flex: 1;
             }
+
+            div[data-field = "windspeed"] {
+                display: flex;
+                gap: 0.3rem;
+                align-items: center;
+                justify-content: center;
+                .icon {
+                    height: 2rem;
+                    width: 2rem;
+                }
+            }
         }
     }
 
     button {
         position: absolute;
         right: 1.6rem;
+        width: var(--btn-width);
         padding: 0.4em 0.7em;
         font-size: 0.8rem;
         border-radius: 1rem;
@@ -572,4 +758,8 @@ header {
 
 .card-hourly.shrank {
     grid-column: 1 / span 1;
+}
+
+html.light #dropdown-search li:hover {
+    background-color: hsl(221, 49%, 97%);
 }
