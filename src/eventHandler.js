@@ -16,8 +16,22 @@ export const EventHandler = {
 
     // Get results when searching for city
     _HandleSearch() {
+        const spinner = document.getElementById("search-spinner");
+        let spinnerTimeout; 
+
         Elements.searchBar.addEventListener("input", async (e) => {
+            // Start spin animation
+            clearTimeout(spinnerTimeout);                      // cancel previous
+            spinnerTimeout = setTimeout(() => {                // delay to match debounce
+                spinner.classList.add("active");
+            }, 1000);
+
             const results = await _getLocations(e);
+
+            // Finish spin animation
+            clearTimeout(spinnerTimeout);                      // cancel if results came fast
+            spinner.classList.remove("active");
+
             this.lastResults = results || [];
             console.log(this.lastResults);
             Render.renderDropdown(results);

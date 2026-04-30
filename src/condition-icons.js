@@ -21,7 +21,7 @@ const CONDITION_MAP = {
     "Heavy Rain":                           "heavy-rain.svg",
     "Heavy Rain And Snow":                  "heavy-rain-snow.svg",
     "Heavy Snow":                           "heavy-snow.svg",
-    "Ice":                                  "ice",
+    "Ice":                                  "ice.svg",
     "Light Drizzle":                        [ "light-drizzle.svg", "night-light-drizzle.svg" ],
     "Light Drizzle/Rain":                   "drizzle.svg",
     "Light Freezing Drizzle/Freezing Rain": "freezing-drizzle.svg",

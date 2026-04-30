@@ -3,7 +3,7 @@ import { EventHandler } from "./eventHandler";
 import { Render } from "./render";
 import { weatherStore } from "./store";
 
-export const Init = (function() {
+export const Init = function() {
     // Theme
     const theme = localStorage.getItem("theme");
     if(theme === "light") {
@@ -46,4 +46,4 @@ export const Init = (function() {
         Render.renderDetails();
         Render.renderHourly();
     })
-})();
+};

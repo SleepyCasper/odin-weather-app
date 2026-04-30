@@ -4,22 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Zephyr</title>
+    <link rel="icon" type="image/x-icon" href="./media/icons/wind-favicon.png">
 </head>
 <body>
     <div class="" id="layout">
         <header>
+            <div class="logo" id="logo">
+                
+                <img src="./media/icons/wind-logo.png" alt="Logo">
+                <h2>Zephyr</h2>
+            </div>
+
             <div class="search">
-                <span class="icon"></span>
+                <span class="icon icon-search"></span>
+                <span class="icon icon-load" id="search-spinner"></span>
                 <input class="secondary" id="input-search" type="text" placeholder="Search city...">
                 <ul id="dropdown-search"></ul>
             </div>
             
-            <button id="btn-toggle-lang">UA</button>
-            
-            <label class="switch">
-                <input type="checkbox" id="theme-checkbox">
-                <span class="slider dark" id="toggle-theme"></span>
-            </label>
+            <div class="buttons">
+                <button id="btn-toggle-lang">UA</button>
+                
+                <label class="switch">
+                    <input type="checkbox" id="theme-checkbox">
+                    <span class="slider dark" id="toggle-theme"></span>
+                </label>
+            </div>
         </header>
         <div class="card-today secondary card" id="card-today">
             
@@ -108,6 +118,10 @@
             <button id="btn-more">Show more</button>
         </div>
     </div>
+
+    <footer>
+        © 2026 <a href="https://www.theodinproject.com/" target="_blank" rel="noopener noreferrer">The Odin Project</a> | <a href="https://github.com/SleepyCasper" target="_blank" rel="noopener noreferrer">SleepyCasper</a>
+    </footer>
 
     <script src="../node_modules/dragscroll/dragscroll.js"></script>
 </body>
