@@ -1,6 +1,6 @@
 import { parseCondition } from "./utils";
 
-const BASE = "/media/weather/";
+const BASE = "./media/weather/";
 
 const CONDITION_MAP = {
     "Blowing Or Drifting Snow":             "drifting-snow.svg",       

@@ -71,7 +71,7 @@ export const Render = (function() {
                 <p class="feels" data-field="feels">${formatTemp(h.feelslike)}°</p>
                 <p class="precip" data-field="precip">${h.precipprob}%</p>
                 <p class="wind" data-field="wind">
-                    <span class="icon wind-dir" style="background-image:url(/media/icons/wind-${degToCardinal(h.winddir)}.svg);"></span>
+                    <span class="icon wind-dir" style="background-image:url(./media/icons/wind-${degToCardinal(h.winddir)}.svg);"></span>
                     ${convertWindSp(h.windspeed)}${t("windSpeed")}
                 </p>
             `;
@@ -102,7 +102,7 @@ export const Render = (function() {
             <p class="temp" data-field="min-max">↓${formatTemp(d.tempmin)}° ↑${formatTemp(d.tempmax)}°</p>
             <p class="precip" data-field="precip">${d.precipprob}%</p>
             <p class="wind" data-field="wind">
-                <span class="icon wind-dir" style="background-image:url(/media/icons/wind-${degToCardinal(d.winddir)}.svg);"></span>
+                <span class="icon wind-dir" style="background-image:url(./media/icons/wind-${degToCardinal(d.winddir)}.svg);"></span>
                 ${convertWindSp(d.windspeed)}${t("windSpeed")}
             </p>`
 
@@ -152,7 +152,7 @@ export const Render = (function() {
             if (field === "windspeed") {
                 const icon = document.createElement("span");
                 icon.classList.add("icon");
-                icon.style = `background-image:url(/media/icons/wind-${degToCardinal(details.winddir)}.svg)`;
+                icon.style = `background-image:url(./media/icons/wind-${degToCardinal(details.winddir)}.svg)`;
                 div.prepend(icon);
             }
             const unit = document.createElement("span");
